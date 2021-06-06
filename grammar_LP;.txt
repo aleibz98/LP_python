@@ -1,0 +1,71 @@
+grammar LP;
+
+root            : 
+
+intruccio       : assignacio
+                | if
+                | while
+                | for
+                | lectura
+                | escriptura
+                | declaraciof
+                | invocaciof;
+
+assignacio      : VARIABLE ASSIGNACIO OPERACIO;
+if              : IF CONDICIO THEN instruccio+ END;
+                | IF CONDICIO THEN instruccio+ ELSE instruccio+ END;
+while           : WHILE CONDICIO DO instruccio+ END;
+for             : FOR VARIABLE FROM VALOR TO VALOR DO instruccio+ END;
+lectura         : [LECTURA VARIABLE]+;
+escriptura      : [ESCRIPTURA VARIABLE]+;
+declaraciof     : PROC FUNCIO IS instruccio+;
+invocaciof      : FUNCIO;
+comentari       : COMENTARI TEXT ENDL;
+
+// PARAULES
+IF              : 'IF';
+THEN            : 'THEN';
+ELSE            : 'ELSE';
+END             : 'END';
+WHILE           : 'WHILE';
+DO              : 'DO';
+FROM            : 'FROM';
+TO              : 'TO';
+PROC            : 'PROC';
+IS              : 'IS';
+
+// TOKENS
+VARIABLE        :   [a-zA-Z0-9\u0080-\u00FF]+ PAR1 VARIABLE [COMA VARIABLE]* PAR2
+FUNCIO          :   [a-zA-Z0-9\u0080-\u00FF]+
+TEXT            :   [a-zA-Z0-9\u0080-\u00FF]*
+VALOR           :   [0-9]+ 
+OPERACIO        :   VALOR
+OPERADOR        :   SUMA
+                |   RESTA
+                |   MULT
+                |   DIV
+
+
+// SINES DE PUNTUACIO o SIMBOLS
+ASSIGNACIO      : ':=';
+LECTURA         : '>>';
+ESCRIPTURA      : '<<';
+PAR1            : '(';
+PAR2            : ')';
+
+SUMA            : '+';
+RESTA           : '-';
+MULT            : '*';
+DIV             : '/';
+
+MESGRAN         : '>';
+MESPETIT        : '<';
+IGUAL           : '==';
+DIF             : '!=';
+MESGRANIGUAL    : '>=';
+MESPETITIGUAL   : '<=';
+
+COMENTARI       : '//';
+COMA            : ', ';
+ENDL            : '\n';
+
