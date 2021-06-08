@@ -1,28 +1,33 @@
 grammar Logo3d;
 
-root            : instruccio+ EOF;
+root            : declaraciof+ EOF;
 
-instruccio      : assignacio
-                | ifcond
-                | whileloop
-                | forloop
-                | lectura
-                | escriptura
-                | declaraciof
-                | invocaciof
-                | comentari
-                ;
+sentencia       : sentencia_simple
+                | bloque;
 
-assignacio      : VARIABLE ASSIGNACIO operacio ENDL;
-ifcond          : IF CONDICIO THEN instruccio+ END
-                | IF CONDICIO THEN instruccio+ ELSE instruccio+ END;
-whileloop       : WHILE CONDICIO DO instruccio+ END;
-forloop         : FOR VARIABLE FROM VALOR TO VALOR DO instruccio+ END;
-lectura         : (LECTURA VARIABLE)+ ENDL;
-escriptura      : (ESCRIPTURA VARIABLE)+ ENDL;
-declaraciof     : PROC FUNCIO IS instruccio+ END;
-invocaciof      : FUNCIO;
-comentari       : COMENTARI TEXT ENDL;
+bloque          : ifcond
+                | bucle;
+
+bucle           : whileloop
+                | forloop;
+
+sentencia_simple    : lectura
+                    | escriptura
+                    | assignacio
+                    | invocaciof
+                    | comentari
+                    ;
+
+assignacio      : VARIABLE ASSIGNACIO expresio;
+ifcond          : IF condicio THEN sentencia+ END
+                | IF condicio THEN sentencia+ ELSE sentencia+ END;
+whileloop       : WHILE condicio DO sentencia+ END;
+forloop         : FOR VARIABLE FROM expresio TO expresio DO sentencia+ END;
+lectura         : (LECTURA expresio)+;
+escriptura      : (ESCRIPTURA expresio)+;
+declaraciof     : PROC funcio IS sentencia+ END;
+invocaciof      : funcio;
+comentari       : COMENTARI TEXT ENL;
 
 // PARAULES
 IF              : 'IF';
@@ -38,24 +43,29 @@ IS              : 'IS';
 FOR             : 'FOR';
 
 // TOKENS
-FUNCIO          :   [a-zA-Z0-9\u0080-\u00FF]+ PAR1 VARIABLE [COMA VARIABLE]* PAR2;
-VARIABLE        :   [a-zA-Z0-9\u0080-\u00FF]+;
-TEXT            :   [a-zA-Z0-9\u0080-\u00FF]*;
-VALOR           :   [0-9]+;
-operacio        :   VALOR OPERADORARITMETIC operacio
+VALOR           :   ENTER
+                |   DECIMAL;
+ENTER           :   [0-9]+;
+DECIMAL         :   ENTER PUNT ENTER;
+funcio          :   VARIABLE PAR1 expresio (COMA expresio)* PAR2
+                |   VARIABLE PAR1 PAR2;
+VARIABLE        :   [a-zA-Z]+ [0-9]*;
+TEXT            :   [a-zA-Z0-9]+;
+
+
+expresio        :   expresio SUMA expresio
+                |   expresio RESTA expresio
+                |   expresio MULT expresio
+                |   expresio DIV expresio
+                |   RESTA expresio
+                |   VARIABLE
+                |   PAR1 expresio PAR2
                 |   VALOR
                 ;
-OPERADORARITMETIC       :   MULT
-                        |   DIV
-                        |   SUMA
-                        |   RESTA
-                        ;
 
-CONDICIO                :   VALOR OPERADORLOGIC VALOR
-                        |   VALOR OPERADORLOGIC VARIABLE
-                        |   VARIABLE OPERADORLOGIC VALOR
-                        |   VARIABLE OPERADORLOGIC VARIABLE
-                        ;
+
+condicio                :   expresio OPERADORLOGIC expresio;
+
 
 OPERADORLOGIC           :   MESGRAN
                         |   MESPETIT
@@ -87,7 +97,8 @@ MESGRANIGUAL    : '>=';
 MESPETITIGUAL   : '<=';
 
 COMENTARI       : '//';
-COMA            : ', ';
-ENDL            : '\n' -> skip;
+COMA            : ',';
+PUNT            : '.';
+ENL             : '\n' -> skip;
 WS              : ' ' -> skip;
 
