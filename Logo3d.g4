@@ -27,7 +27,7 @@ lectura         : (LECTURA expresio)+;
 escriptura      : (ESCRIPTURA expresio)+;
 declaraciof     : PROC funcio IS sentencia+ END;
 invocaciof      : funcio;
-comentari       : COMENTARI TEXT ENL;
+//comentari       : COMENTARI TEXT ENL;
 
 // PARAULES
 IF              : 'IF';
@@ -101,4 +101,5 @@ COMA            : ',';
 PUNT            : '.';
 ENL             : '\n' -> skip;
 WS              : ' ' -> skip;
+LINE_COMMENT    : '//' ~[\r\n]* -> skip ;
 
