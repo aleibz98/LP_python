@@ -38,7 +38,7 @@ class Logo3dVisitor(ParseTreeVisitor):
     # Visit a parse tree produced by Logo3dParser#assignacio.
     def visitAssignacio(self, ctx: Logo3dParser.AssignacioContext):
         value = self.visit(ctx.expresio())
-        self.vars[ctx.VARIABLE().getText()] = value
+        self.variables[ctx.VARIABLE().getText()] = value
 
     # Visit a parse tree produced by Logo3dParser#ifcond.
     def visitIfcond(self, ctx: Logo3dParser.IfcondContext):
@@ -70,9 +70,16 @@ class Logo3dVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by Logo3dParser#whileloop.
     def visitWhileloop(self, ctx: Logo3dParser.WhileloopContext):
-        condicio = self.visit(ctx.condicio)
+        condicio = self.visit(ctx.condicio())
+        children = list(ctx.getChildren())
+
+
         while (condicio):
-            self.visit(ctx.sentencia) #TODO puede haber más de una sentencia
+            i = 3
+            while children[i].getText() != "END":
+                self.visit(children[i])
+                i += 1
+            condicio = self.visit(ctx.condicio())
 
     # Visit a parse tree produced by Logo3dParser#forloop.
     def visitForloop(self, ctx: Logo3dParser.ForloopContext):
