@@ -70,15 +70,15 @@ class Logo3dVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by Logo3dParser#lectura.
     def visitLectura(self, ctx: Logo3dParser.LecturaContext):
-        ids = [id.getText() for id in ctx.VARIABLE()]
-        for id in ids:
-            self.variables[id] = input()
-            print("Lectura realitzada: " + id + " toma el valor " + self.variables[id])
+        id = ctx.VARIABLE().getText()
+        self.variables[id] = input()
+        print("Lectura realitzada: " + id + " toma el valor " + self.variables[id])
 
     # Visit a parse tree produced by Logo3dParser#escriptura.
     def visitEscriptura(self, ctx: Logo3dParser.EscripturaContext):
-        valors = [self.variables[expresio] for expresio in self.visit(ctx.expresio())]
-        print(valors)
+        node = ctx.getChild(1).getText()
+        valor = self.visit(ctx.expresio())
+        print(node + " pren el valor " + str(valor))
         #TODO això es podria millorar
 
     # Visit a parse tree produced by Logo3dParser#declaraciof.
@@ -125,10 +125,17 @@ class Logo3dVisitor(ParseTreeVisitor):
     # Visit a parse tree produced by Logo3dParser#expresio.
     def visitExpresio(self, ctx: Logo3dParser.ExpresioContext):
         children = list(ctx.getChildren())
+        count = ctx.getChildCount()
         result = None
 
-        if children[1].getText() == "+":
-            result =  self.visit(ctx.expresio(0)) + self.visit(ctx.expresio(1))
+        if count == 1:
+            if Logo3dParser.symbolicNames[children[0].getSymbol().type] == "VARIABLE":
+                result = float(self.variables[ctx.getText()])
+            elif (Logo3dParser.symbolicNames[children[0].getSymbol().type] == "VALOR"):
+                result = float(ctx.getText())
+        elif children[1].getText() == "+":
+            print(self.visit(ctx.expresio(0)))
+            result = self.visit(ctx.expresio(0)) + self.visit(ctx.expresio(1))
         elif children[1].getText() == "-":
             result = self.visit(ctx.expresio(0)) - self.visit(ctx.expresio(1))
         elif children[1].getText() == "*":
@@ -141,8 +148,6 @@ class Logo3dVisitor(ParseTreeVisitor):
                 print("Divisió entre 0")
         elif children[0].getText() == "-":
             result = - self.visit(ctx.expresio(0))
-        elif len(children) == 1:
-            result = self.visit(children(0))
         elif children[0].getText() == '(' and children[2].getText() == ')':
             result = self.visit(ctx.expresio())
         else:
@@ -173,6 +178,3 @@ class Logo3dVisitor(ParseTreeVisitor):
             print("Operador inesperat")
             pass
         return result
-
-
-del Logo3dParser
