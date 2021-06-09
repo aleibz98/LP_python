@@ -15,7 +15,6 @@ sentencia_simple    : lectura
                     | escriptura
                     | assignacio
                     | invocaciof
-                    | comentari
                     ;
 
 assignacio      : VARIABLE ASSIGNACIO expresio;
