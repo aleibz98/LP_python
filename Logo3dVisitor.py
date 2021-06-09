@@ -11,6 +11,10 @@ else:
 
 class Logo3dVisitor(ParseTreeVisitor):
 
+    def __init__(self):
+        self.variables = {}         # como prueba haremos key = varName, value = varValue
+        self.sentencies = {}        # key = funcName, value = lista sentencias
+        self.parametres = {}        # key = funcName, value = llista parametres
     # Visit a parse tree produced by Logo3dParser#root.
     def visitRoot(self, ctx: Logo3dParser.RootContext):
         return self.visitChildren(ctx)
@@ -38,26 +42,25 @@ class Logo3dVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by Logo3dParser#ifcond.
     def visitIfcond(self, ctx: Logo3dParser.IfcondContext):
-        condicio = self.visit(ctx.condicio())
+        condicio = self.visit(ctx.condicio)
         if condicio:
-            self.visit(ctx.sentencia())  # pot haver-hi varies sentencies
+            self.visit(ctx.sentencia)  # pot haver-hi varies sentencies
         else:
-            if ctx.getChild(4).getText() == 'ELSE':
-                self.visit(ctx.sentencia())  # visitar les sentencies de despres del ELSE
+            if ctx.getChild(4).getText() == 'ELSE': #TODO esto esta mal, no tiene porque ser el hijo 4
+                self.visit(ctx.sentencia)  # visitar les sentencies de despres del ELSE
 
     # Visit a parse tree produced by Logo3dParser#whileloop.
     def visitWhileloop(self, ctx: Logo3dParser.WhileloopContext):
-        condicio = self.visit(ctx.condicio())
+        condicio = self.visit(ctx.condicio)
         while (condicio):
-            self.visit(ctx.sentencia())
-        return self.visitChildren(ctx)
+            self.visit(ctx.sentencia) #TODO puede haber más de una sentencia
 
     # Visit a parse tree produced by Logo3dParser#forloop.
     def visitForloop(self, ctx: Logo3dParser.ForloopContext):
         iterador = self.visit(ctx.VARIABLE().getText())
         val_entrada = self.visit(ctx.expresio(0))
         val_salida = self.visit(ctx.expresio(1))
-        sentencias = [sent for sent in self.visit(ctx.sentencia())]
+        sentencias = [sent for sent in self.visit(ctx.sentencia)]
 
         for i in range(val_entrada, val_salida):
             self.vars[iterador] = val_entrada
@@ -67,34 +70,34 @@ class Logo3dVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by Logo3dParser#lectura.
     def visitLectura(self, ctx: Logo3dParser.LecturaContext):
-        ids = [id for id in self.visit(ctx.expresio())]
+        ids = [id.getText() for id in ctx.VARIABLE()]
         for id in ids:
-            self.vars[id] = input()
-            print("Lectura realitzada: " + id + " toma el valor " + self.vars[id])
-        return self.visitChildren(ctx)
+            self.variables[id] = input()
+            print("Lectura realitzada: " + id + " toma el valor " + self.variables[id])
 
     # Visit a parse tree produced by Logo3dParser#escriptura.
     def visitEscriptura(self, ctx: Logo3dParser.EscripturaContext):
-        valors = [self.vars[expresio] for expresio in self.visit(ctx.expresio())]
+        valors = [self.variables[expresio] for expresio in self.visit(ctx.expresio())]
         print(valors)
+        #TODO això es podria millorar
 
     # Visit a parse tree produced by Logo3dParser#declaraciof.
     def visitDeclaraciof(self, ctx: Logo3dParser.DeclaraciofContext):
         funcio, parametresf = self.visit(ctx.funcio())
         self.parametres[funcio] = parametresf
-        temp = [sentencia for sentencia in self.getChildren()]
+        temp = list(ctx.getChildren())
         temp2 = []
         for sentencia in temp:
-            if Logo3dParser.symbolicNames[sentencia.getSymbol().type] == "sentencia":
+            if sentencia.getText():
                 temp2.append(sentencia)
         self.sentencies[funcio] = temp2
         print("Funció declarada")
 
         if funcio == "main":
+            print("Executem funció main")
             for sentencia in self.sentencies[funcio]: # Si la declaració es del main, hi ha que executar la funcio
                 self.visit(sentencia)
             print("Funció main executada")
-
 
     # Visit a parse tree produced by Logo3dParser#invocaciof.
     def visitInvocaciof(self, ctx: Logo3dParser.InvocaciofContext):
@@ -105,6 +108,9 @@ class Logo3dVisitor(ParseTreeVisitor):
         for sentencia in self.sentencies[funcio]:
             self.visit(sentencia)
 
+        if funcio in ["forward", "left", "right", "backward", "up", "down", "color"]:
+            # TODO executar les funcions
+            pass
 
     # Visit a parse tree produced by Logo3dParser#funcio.
     def visitFuncio(self, ctx: Logo3dParser.FuncioContext):
@@ -112,7 +118,7 @@ class Logo3dVisitor(ParseTreeVisitor):
         children = [child for child in ctx.getChildren()]
         parametres = []
         for child in children:
-            if Logo3dParser.symbolicNames[child.getSymbol().type] == "expresio":
+            if child.getText() == "expresio":
                 parametres.append(self.visit(child))
         return funcName, parametres
 

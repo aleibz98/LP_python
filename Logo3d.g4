@@ -22,8 +22,8 @@ ifcond          : IF condicio THEN sentencia+ END
                 | IF condicio THEN sentencia+ ELSE sentencia+ END;
 whileloop       : WHILE condicio DO sentencia+ END;
 forloop         : FOR VARIABLE FROM expresio TO expresio DO sentencia+ END;
-lectura         : (LECTURA expresio)+;
-escriptura      : (ESCRIPTURA expresio)+;
+lectura         : LECTURA VARIABLE;
+escriptura      : ESCRIPTURA expresio;
 declaraciof     : PROC funcio IS sentencia+ END;
 invocaciof      : funcio;
 //comentari       : COMENTARI TEXT ENL;

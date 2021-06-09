@@ -1,12 +1,10 @@
-
 import sys
 from antlr4 import *
 from Logo3dLexer import Logo3dLexer
 from Logo3dParser import Logo3dParser
 from Logo3dVisitor import Logo3dVisitor
 from antlr4.InputStream import InputStream
-import networkx as nx
-import matplotlib.pyplot as plt
+
 
 if len(sys.argv) > 1:
     input_stream = FileStream(sys.argv[1], encoding="utf-8")
