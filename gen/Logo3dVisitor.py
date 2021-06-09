@@ -179,7 +179,8 @@ class Logo3dVisitor(ParseTreeVisitor):
         exp2 = self.visit(ctx.expresio(1))
         comparador = ctx.OPERADORLOGIC().getText()
         result = None
-
+        # TODO las comparaciones fallan
+        # TODO podria añadir comparacion && || entre condiciones
         if comparador == '>':
             result = exp1 > exp2
         elif comparador == '<':

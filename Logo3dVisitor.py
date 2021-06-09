@@ -42,12 +42,31 @@ class Logo3dVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by Logo3dParser#ifcond.
     def visitIfcond(self, ctx: Logo3dParser.IfcondContext):
-        condicio = self.visit(ctx.condicio)
-        if condicio:
-            self.visit(ctx.sentencia)  # pot haver-hi varies sentencies
+        condicio = self.visit(ctx.condicio())
+        children = list(ctx.getChildren())
+        i = 3
+        sent1 = []
+        sent2 = []
+        while children[i].getText() != "ELSE" and children[i].getText() != "END":
+            sent1.append(children[i])
+            i += 1
+        if children[i].getText() == "END":
+            return
         else:
-            if ctx.getChild(4).getText() == 'ELSE': #TODO esto esta mal, no tiene porque ser el hijo 4
-                self.visit(ctx.sentencia)  # visitar les sentencies de despres del ELSE
+            while children[i].getText() != "END":
+                sent2.append(children[i])
+                i += 1
+
+        if condicio:
+            print("executem if-then")
+            for sent in sent1:
+                self.visit(sent)
+        elif len(sent2) > 0:
+            print("executem else")
+            for sent in sent2:
+                self.visit(sent)
+        else:
+            pass
 
     # Visit a parse tree produced by Logo3dParser#whileloop.
     def visitWhileloop(self, ctx: Logo3dParser.WhileloopContext):
@@ -60,7 +79,7 @@ class Logo3dVisitor(ParseTreeVisitor):
         iterador = self.visit(ctx.VARIABLE().getText())
         val_entrada = self.visit(ctx.expresio(0))
         val_salida = self.visit(ctx.expresio(1))
-        sentencias = [sent for sent in self.visit(ctx.sentencia)]
+        sentencias = [sent for sent in self.visit(ctx.sentencia())]
 
         for i in range(val_entrada, val_salida):
             self.vars[iterador] = val_entrada
@@ -79,7 +98,6 @@ class Logo3dVisitor(ParseTreeVisitor):
         node = ctx.getChild(1).getText()
         valor = self.visit(ctx.expresio())
         print(node + " pren el valor " + str(valor))
-        #TODO això es podria millorar
 
     # Visit a parse tree produced by Logo3dParser#declaraciof.
     def visitDeclaraciof(self, ctx: Logo3dParser.DeclaraciofContext):
@@ -161,7 +179,8 @@ class Logo3dVisitor(ParseTreeVisitor):
         exp2 = self.visit(ctx.expresio(1))
         comparador = ctx.OPERADORLOGIC().getText()
         result = None
-
+        # TODO las comparaciones fallan
+        # TODO podria añadir comparacion && || entre condiciones
         if comparador == '>':
             result = exp1 > exp2
         elif comparador == '<':
