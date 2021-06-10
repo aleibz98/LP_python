@@ -24,10 +24,13 @@ whileloop       : WHILE condicio DO sentencia+ END;
 forloop         : FOR VARIABLE FROM expresio TO expresio DO sentencia+ END;
 lectura         : LECTURA VARIABLE;
 escriptura      : ESCRIPTURA expresio;
-declaraciof     : PROC funcio IS sentencia+ END;
+declaraciof     : PROC VARIABLE PAR1 parametros PAR2 IS sentencia+ END;
 invocaciof      : funcio;
 //comentari       : COMENTARI TEXT ENL;
 
+parametros      : VARIABLE (COMA VARIABLE)*
+                |
+                ;
 // PARAULES
 IF              : 'IF';
 THEN            : 'THEN';
@@ -95,10 +98,9 @@ DIF             : '!=';
 MESGRANIGUAL    : '>=';
 MESPETITIGUAL   : '<=';
 
-COMENTARI       : '//';
 COMA            : ',';
 PUNT            : '.';
-ENL             : '\n' -> skip;
-WS              : ' ' -> skip;
 LINE_COMMENT    : '//' ~[\r\n]* -> skip ;
+WS              : [ \n\r\t]+ -> skip ;
+
 

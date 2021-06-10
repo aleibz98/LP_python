@@ -83,7 +83,7 @@ class Turtle3D:
         self.color = color.red
 
 
-turtle = Turtle3D()
+#turtle = Turtle3D()
 
 """
 #TEST 1

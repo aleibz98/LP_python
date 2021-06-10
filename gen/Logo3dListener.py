@@ -125,6 +125,15 @@ class Logo3dListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by Logo3dParser#parametros.
+    def enterParametros(self, ctx:Logo3dParser.ParametrosContext):
+        pass
+
+    # Exit a parse tree produced by Logo3dParser#parametros.
+    def exitParametros(self, ctx:Logo3dParser.ParametrosContext):
+        pass
+
+
     # Enter a parse tree produced by Logo3dParser#funcio.
     def enterFuncio(self, ctx:Logo3dParser.FuncioContext):
         pass

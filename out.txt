@@ -1,0 +1,5 @@
+? (root (declaraciof PROC (funcio main ( )) IS (sentencia (sentencia_simple (lectura >> x))) (sentencia (bloque (ifcond IF (condicio (expresio x) > (expresio 4)) THEN (sentencia (sentencia_simple (escriptura << (expresio x)))) ELSE (sentencia (sentencia_simple (escriptura << (expresio (expresio x) + (expresio 1))))) END))) END) <EOF>)
+Funció declarada :main
+Executem funció main
+>>x
+Introduir valor per x:
