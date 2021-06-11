@@ -14,6 +14,9 @@ PROC espiral(cercles) IS
     END
 END
 
+
+
 PROC main() IS
     espiral(5)
+    reset()
 END

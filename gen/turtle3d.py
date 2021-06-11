@@ -69,6 +69,9 @@ class Turtle3D:
     def cambiaRadio(self, r):
         self.radio = r
 
+    def reset(self):
+        self.__init__()
+
     # Operacions privades
     def __init__(self):
         scene.height = scene.width = 1000

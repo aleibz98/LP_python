@@ -8,6 +8,11 @@ from antlr4.InputStream import InputStream
 
 if len(sys.argv) > 1:
     input_stream = FileStream(sys.argv[1])
+    if len(sys.argv) > 2:
+        start_func = sys.argv[2]
+    else:
+        start_func = "main"
+
 else:
     input_stream = InputStream(input('? '))
 print(input_stream)
@@ -17,5 +22,5 @@ token_stream = CommonTokenStream(lexer)
 parser = Logo3dParser(token_stream)
 tree = parser.root()
 print(tree.toStringTree(recog=parser))
-visitor = Logo3dVisitor()
+visitor = Logo3dVisitor(start_func)
 visitor.visit(tree)
