@@ -1,4 +1,5 @@
 # Generated from C:/Users/aleib/Desktop/practica_python_LP/LP_python\Logo3d.g4 by ANTLR 4.9.1
+import sys
 from antlr4 import *
 from turtle3d import Turtle3D
 
@@ -10,32 +11,52 @@ else:
 
 # This class defines a complete generic visitor for a parse tree produced by Logo3dParser.
 
-class Logo3dVisitor(ParseTreeVisitor):
+class Logo3dVisitor(ParseTreeVisitor, object):
 
-    def __init__(self):
+    def __init__(self, main_func):
         self.variables = {}  # como prueba haremos key = varName, value = varValue
         self.sentencies = {}  # key = funcName, value = lista sentencias
         self.parametres = {"forward": ["distanceF"],
                            "backward": ["distanceB"],
                            "left": ["angleL"],
-                           "rigth": ["angleR"],
+                           "right": ["angleR"],
                            "up": ["angleU"],
                            "down": ["angleD"],
                            "color": ["a", "b", "c"],
-                           "hide":  [],
-                           "show":  [],
-                           "home":  [],
-                           "radio": ["r"]}
-        self.defaults = ["forward", "backward", "up", "down", "left", "right", "color", "hide", "show", "home", "radio" ]
+                           "hide": [],
+                           "show": [],
+                           "home": [],
+                           "radio": ["r"],
+                           "reset": []}
+        self.defaults = ["forward", "backward", "up", "down", "left", "right", "color", "hide", "show", "home", "radio",
+                         "reset"]
         self.current_ctx = {}
         self.turtle = Turtle3D()
+        self.start_func = main_func
 
         # key = funcName, value = llista parametres
         # TODO inicializar parametres[forward], pararametres[left]...
 
     # Visit a parse tree produced by Logo3dParser#root.
     def visitRoot(self, ctx: Logo3dParser.RootContext):
-        return self.visitChildren(ctx)
+        self.visitChildren(ctx)
+        if not self.sentencies.__contains__(self.start_func):
+            raise Exception("Funció inicial no definida")
+        param_names = self.parametres[self.start_func]
+        context = {}
+        if len(param_names) > 0:
+            params_vals = str(InputStream(input('? '))).split(' ')
+            if (len(params_vals) != len(param_names)):
+                raise Exception("Nombre de paràmetres incorrecte")
+            for param_name, param_val in zip(param_names, params_vals):
+                context[param_name] = param_val
+        self.current_ctx = context
+        print("executem funció inicial: " + self.start_func)
+        for sentencia in self.sentencies[self.start_func]:  # Si la declaració es del main, hi ha que executar la funcio
+            print(sentencia.getText())
+            self.visit(sentencia)
+        print("funció principal executada")
+        return
 
     # Visit a parse tree produced by Logo3dParser#sentencia.
     def visitSentencia(self, ctx: Logo3dParser.SentenciaContext):
@@ -105,13 +126,12 @@ class Logo3dVisitor(ParseTreeVisitor):
 
         children = list(ctx.getChildren())
 
-        for var in range(int(initVal), int(endVal)):
+        for var in range(int(initVal), int(endVal) + 1):
             i = 7
             self.current_ctx[itName] = var
             while children[i].getText() != "END":
                 self.visit(children[i])
                 i += 1
-
 
     # Visit a parse tree produced by Logo3dParser#lectura.
     def visitLectura(self, ctx: Logo3dParser.LecturaContext):
@@ -132,6 +152,11 @@ class Logo3dVisitor(ParseTreeVisitor):
         funcio = ctx.VARIABLE().getText()
         parametresf = self.visit(ctx.parametros())
         print(parametresf)
+        if self.sentencies.__contains__(funcio):
+            raise Exception("Funció ja definida")
+        tmp_set = set(parametresf)
+        if len(parametresf) != len(set(parametresf)):
+            raise Exception("Nom de paràmetre repetit")
         self.parametres[funcio] = parametresf
         children = list(ctx.getChildren())
         print([child.getText() for child in children])
@@ -143,14 +168,6 @@ class Logo3dVisitor(ParseTreeVisitor):
         self.sentencies[funcio] = sentencies_tmp
         print("Funció declarada :" + funcio)
 
-        if funcio == "main":
-            print("Executem funció main")
-            self.current_ctx = {}
-            for sentencia in self.sentencies[funcio]:  # Si la declaració es del main, hi ha que executar la funcio
-                print(sentencia.getText())
-                self.visit(sentencia)
-            print("Funció main executada")
-
     # Visit a parse tree produced by Logo3dParser#invocaciof.
     def visitInvocaciof(self, ctx: Logo3dParser.InvocaciofContext):
         funcio, parametresf = self.visit(ctx.funcio())
@@ -158,6 +175,11 @@ class Logo3dVisitor(ParseTreeVisitor):
         print((self.parametres[funcio]))
         print(parametresf)
         new_context = {}
+        if not self.parametres.__contains__(funcio):
+            raise Exception("Funció no definida")
+        if len(parametresf) != len(self.parametres[funcio]):
+            raise Exception("Nombre de paràmetres incorrecte")
+
         for arg, val in zip(self.parametres[funcio], parametresf):
             new_context[arg] = val
 
@@ -183,11 +205,12 @@ class Logo3dVisitor(ParseTreeVisitor):
             elif funcio == "hide":
                 self.turtle.hide()
             elif funcio == "color":
-                self.turtle.color(self.current_ctx["a"], self.current_ctx["b"],self.current_ctx["c"])
+                self.turtle.cambiaColor(self.current_ctx["a"], self.current_ctx["b"], self.current_ctx["c"])
             elif funcio == "radio":
-                self.turtle.radio(self.current_ctx["r"])
+                self.turtle.cambiaRadio(self.current_ctx["r"])
+            elif funcio == "reset":
+                self.turtle.reset()
         else:
-            #new_context, self.current_ctx = self.current_ctx, new_context
             for sentencia in self.sentencies[funcio]:
                 print(sentencia.getText())
                 self.visit(sentencia)
@@ -225,17 +248,17 @@ class Logo3dVisitor(ParseTreeVisitor):
         elif children[1].getText() == "*":
             result = self.visit(ctx.expresio(0)) * self.visit(ctx.expresio(1))
         elif children[1].getText() == "/":
-            second = self.visit(ctx.expresio(1))
-            if second != 0:
+            try:
                 result = self.visit(ctx.expresio(0)) / self.visit(ctx.expresio(1))
-            else:
-                print("Divisió entre 0")
+            except:
+                raise Exception("Divisió entre 0")
         elif children[0].getText() == "-":
             result = - self.visit(ctx.expresio(0))
         elif children[0].getText() == '(' and children[2].getText() == ')':
             result = self.visit(ctx.expresio())
         else:
-            print("Expresió no definida")
+            raise Exception("Operador inesperat")
+            pass
 
         return result
 
@@ -260,7 +283,7 @@ class Logo3dVisitor(ParseTreeVisitor):
         elif comparador == '<=':
             result = exp1 <= exp2
         else:
-            print("Operador inesperat")
+            raise Exception("Operador inesperat")
             pass
         return result
 

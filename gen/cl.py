@@ -8,6 +8,7 @@ from antlr4.InputStream import InputStream
 
 if len(sys.argv) > 1:
     input_stream = FileStream(sys.argv[1])
+    print(len(sys.argv))
     if len(sys.argv) > 2:
         start_func = sys.argv[2]
     else:
@@ -15,7 +16,7 @@ if len(sys.argv) > 1:
 
 else:
     input_stream = InputStream(input('? '))
-print(input_stream)
+    start_func = "main"
 
 lexer = Logo3dLexer(input_stream)
 token_stream = CommonTokenStream(lexer)
