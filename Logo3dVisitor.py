@@ -52,8 +52,11 @@ class Logo3dVisitor(ParseTreeVisitor, object):
                 context[param_name] = param_val
         self.current_ctx = context
         print("executem funció inicial: " + self.start_func)
+
+        i = 0
         for sentencia in self.sentencies[self.start_func]:  # Si la declaració es del main, hi ha que executar la funcio
-            print(sentencia.getText())
+            i += 1
+            print(sentencia.getText(), str(i))
             self.visit(sentencia)
         print("funció principal executada")
         return
@@ -81,6 +84,7 @@ class Logo3dVisitor(ParseTreeVisitor, object):
 
     # Visit a parse tree produced by Logo3dParser#ifcond.
     def visitIfcond(self, ctx: Logo3dParser.IfcondContext):
+        print("La condició es : " + ctx.condicio().getText())
         condicio = self.visit(ctx.condicio())
         children = list(ctx.getChildren())
         i = 3
@@ -94,6 +98,8 @@ class Logo3dVisitor(ParseTreeVisitor, object):
                 sent2.append(children[i])
                 i += 1
 
+        print("Pren el valor: " + str(condicio))
+
         if condicio:
             print("executem if-then")
             for sent in sent1:
@@ -103,7 +109,6 @@ class Logo3dVisitor(ParseTreeVisitor, object):
             for sent in sent2:
                 self.visit(sent)
         else:
-            print("Liada")
             pass
 
     # Visit a parse tree produced by Logo3dParser#whileloop.
@@ -238,9 +243,18 @@ class Logo3dVisitor(ParseTreeVisitor, object):
 
         if count == 1:
             if Logo3dParser.symbolicNames[children[0].getSymbol().type] == "VARIABLE":
-                result = float(self.current_ctx[ctx.getText()])
+                result = self.current_ctx[ctx.getText()]
+                if type(result) != type(True):
+                    result = float(result)
+
             elif Logo3dParser.symbolicNames[children[0].getSymbol().type] == "VALOR":
                 result = float(ctx.getText())
+            elif Logo3dParser.symbolicNames[children[0].getSymbol().type] == "BOOL":
+                tmp = ctx.getText()
+                if tmp == 'True':
+                    result = True
+                else:
+                    result = False
         elif children[1].getText() == "+":
             result = self.visit(ctx.expresio(0)) + self.visit(ctx.expresio(1))
         elif children[1].getText() == "-":
@@ -264,27 +278,35 @@ class Logo3dVisitor(ParseTreeVisitor, object):
 
     # Visit a parse tree produced by Logo3dParser#condicio.
     def visitCondicio(self, ctx: Logo3dParser.CondicioContext):
-        exp1 = self.visit(ctx.expresio(0))
-        exp2 = self.visit(ctx.expresio(1))
-        comparador = ctx.OPERADORLOGIC().getText()
         result = None
-        # TODO las comparaciones fallan
-        # TODO podria añadir comparacion && || entre condiciones
-        if comparador == '>':
-            result = exp1 > exp2
-        elif comparador == '<':
-            result = exp1 < exp2
-        elif comparador == '==':
-            result = exp1 == exp2
-        elif comparador == '!=':
-            result = exp1 != exp2
-        elif comparador == '>=':
-            result = exp1 >= exp2
-        elif comparador == '<=':
-            result = exp1 <= exp2
+        if ctx.getChildCount() == 1:
+            if Logo3dParser.symbolicNames[ctx.getChild(0).getSymbol().type] == "VARIABLE":
+                content = self.current_ctx[ctx.getChild(0).getText()]
+                #print(self.current_ctx)
+                result = content
         else:
-            raise Exception("Operador inesperat")
-            pass
+            exp1 = self.visit(ctx.getChild(0))
+            exp2 = self.visit(ctx.getChild(2))
+            comparador = ctx.getChild(1).getText()
+            if comparador == '>':
+                result = exp1 > exp2
+            elif comparador == '<':
+                result = exp1 < exp2
+            elif comparador == '==':
+                result = exp1 == exp2
+            elif comparador == '!=':
+                result = exp1 != exp2
+            elif comparador == '>=':
+                result = exp1 >= exp2
+            elif comparador == '<=':
+                result = exp1 <= exp2
+            elif comparador == '&&':
+                result = exp1 and exp2
+            elif comparador == '||':
+                result = exp1 or exp2
+            else:
+                raise Exception("Operador inesperat")
+                pass
         return result
 
     def visitParametros(self, ctx: Logo3dParser.ParametrosContext):

@@ -51,6 +51,8 @@ ENTER           :   [0-9]+;
 DECIMAL         :   ENTER PUNT ENTER;
 funcio          :   VARIABLE PAR1 expresio (COMA expresio)* PAR2
                 |   VARIABLE PAR1 PAR2;
+BOOL            :   'True'
+                |   'False';
 VARIABLE        :   [a-zA-Z]+ [0-9]*;
 TEXT            :   [a-zA-Z0-9]+;
 
@@ -60,13 +62,18 @@ expresio        :   expresio SUMA expresio
                 |   expresio MULT expresio
                 |   expresio DIV expresio
                 |   RESTA expresio
+                |   BOOL
                 |   VARIABLE
                 |   PAR1 expresio PAR2
                 |   VALOR
                 ;
 
 
-condicio                :   expresio OPERADORLOGIC expresio;
+condicio                :   expresio OPERADORLOGIC expresio
+                        |   condicio AND condicio
+                        |   condicio OR condicio
+                        |   VARIABLE
+                        ;
 
 
 OPERADORLOGIC           :   MESGRAN
@@ -97,6 +104,8 @@ IGUAL           : '==';
 DIF             : '!=';
 MESGRANIGUAL    : '>=';
 MESPETITIGUAL   : '<=';
+AND             : '&&';
+OR              : '||';
 
 COMA            : ',';
 PUNT            : '.';

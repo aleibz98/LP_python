@@ -15,5 +15,38 @@ PROC espiral(cercles) IS
 END
 
 PROC main() IS
-    espiral(5)
+    x := 5
+    y := 5
+    z := True
+    k := False
+    IF k THEN
+        << k
+    ELSE
+        h := 8
+        << h
+    END
+    IF z THEN
+        << z
+    END
+    IF x < y || x == 5 THEN
+        a := 1
+        << a
+    END
+    IF x == y && x == 5 THEN
+        a := 2
+        << a
+    END
+    IF x > y && x == 5 THEN
+        a := 3
+        << a
+     END
+END
+
+PROC lol() IS
+    x := 5
+    y := 5
+    z := True
+    IF z THEN
+        << z
+    END
 END
