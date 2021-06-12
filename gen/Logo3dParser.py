@@ -11,8 +11,8 @@ else:
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3)")
-        buf.write("\u00d7\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3*")
+        buf.write("\u00d9\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\3\2\6\2")
         buf.write("&\n\2\r\2\16\2\'\3\2\3\2\3\3\3\3\5\3.\n\3\3\4\3\4\5\4")
@@ -30,52 +30,52 @@ def serializedATN():
         buf.write("\21\3\21\3\21\3\21\3\21\3\21\3\21\5\21\u00b1\n\21\3\21")
         buf.write("\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21")
         buf.write("\7\21\u00bf\n\21\f\21\16\21\u00c2\13\21\3\22\3\22\3\22")
-        buf.write("\3\22\3\22\3\22\5\22\u00ca\n\22\3\22\3\22\3\22\3\22\3")
-        buf.write("\22\3\22\7\22\u00d2\n\22\f\22\16\22\u00d5\13\22\3\22\2")
-        buf.write("\4 \"\23\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"\2\2")
-        buf.write("\2\u00e2\2%\3\2\2\2\4-\3\2\2\2\6\61\3\2\2\2\b\65\3\2\2")
-        buf.write("\2\n;\3\2\2\2\f=\3\2\2\2\16[\3\2\2\2\20]\3\2\2\2\22g\3")
-        buf.write("\2\2\2\24u\3\2\2\2\26x\3\2\2\2\30{\3\2\2\2\32\u0088\3")
-        buf.write("\2\2\2\34\u0093\3\2\2\2\36\u00a4\3\2\2\2 \u00b0\3\2\2")
-        buf.write("\2\"\u00c9\3\2\2\2$&\5\30\r\2%$\3\2\2\2&\'\3\2\2\2\'%")
-        buf.write("\3\2\2\2\'(\3\2\2\2()\3\2\2\2)*\7\2\2\3*\3\3\2\2\2+.\5")
-        buf.write("\n\6\2,.\5\6\4\2-+\3\2\2\2-,\3\2\2\2.\5\3\2\2\2/\62\5")
-        buf.write("\16\b\2\60\62\5\b\5\2\61/\3\2\2\2\61\60\3\2\2\2\62\7\3")
-        buf.write("\2\2\2\63\66\5\20\t\2\64\66\5\22\n\2\65\63\3\2\2\2\65")
-        buf.write("\64\3\2\2\2\66\t\3\2\2\2\67<\5\24\13\28<\5\26\f\29<\5")
-        buf.write("\f\7\2:<\5\32\16\2;\67\3\2\2\2;8\3\2\2\2;9\3\2\2\2;:\3")
-        buf.write("\2\2\2<\13\3\2\2\2=>\7\22\2\2>?\7\25\2\2?@\5 \21\2@\r")
-        buf.write("\3\2\2\2AB\7\3\2\2BC\5\"\22\2CE\7\4\2\2DF\5\4\3\2ED\3")
-        buf.write("\2\2\2FG\3\2\2\2GE\3\2\2\2GH\3\2\2\2HI\3\2\2\2IJ\7\6\2")
-        buf.write("\2J\\\3\2\2\2KL\7\3\2\2LM\5\"\22\2MO\7\4\2\2NP\5\4\3\2")
-        buf.write("ON\3\2\2\2PQ\3\2\2\2QO\3\2\2\2QR\3\2\2\2RS\3\2\2\2SU\7")
-        buf.write("\5\2\2TV\5\4\3\2UT\3\2\2\2VW\3\2\2\2WU\3\2\2\2WX\3\2\2")
-        buf.write("\2XY\3\2\2\2YZ\7\6\2\2Z\\\3\2\2\2[A\3\2\2\2[K\3\2\2\2")
-        buf.write("\\\17\3\2\2\2]^\7\7\2\2^_\5\"\22\2_a\7\b\2\2`b\5\4\3\2")
-        buf.write("a`\3\2\2\2bc\3\2\2\2ca\3\2\2\2cd\3\2\2\2de\3\2\2\2ef\7")
-        buf.write("\6\2\2f\21\3\2\2\2gh\7\r\2\2hi\7\22\2\2ij\7\t\2\2jk\5")
-        buf.write(" \21\2kl\7\n\2\2lm\5 \21\2mo\7\b\2\2np\5\4\3\2on\3\2\2")
-        buf.write("\2pq\3\2\2\2qo\3\2\2\2qr\3\2\2\2rs\3\2\2\2st\7\6\2\2t")
-        buf.write("\23\3\2\2\2uv\7\26\2\2vw\7\22\2\2w\25\3\2\2\2xy\7\27\2")
-        buf.write("\2yz\5 \21\2z\27\3\2\2\2{|\7\13\2\2|}\7\22\2\2}~\7\30")
+        buf.write("\3\22\3\22\3\22\3\22\3\22\5\22\u00cc\n\22\3\22\3\22\3")
+        buf.write("\22\3\22\3\22\3\22\7\22\u00d4\n\22\f\22\16\22\u00d7\13")
+        buf.write("\22\3\22\2\4 \"\23\2\4\6\b\n\f\16\20\22\24\26\30\32\34")
+        buf.write("\36 \"\2\2\2\u00e5\2%\3\2\2\2\4-\3\2\2\2\6\61\3\2\2\2")
+        buf.write("\b\65\3\2\2\2\n;\3\2\2\2\f=\3\2\2\2\16[\3\2\2\2\20]\3")
+        buf.write("\2\2\2\22g\3\2\2\2\24u\3\2\2\2\26x\3\2\2\2\30{\3\2\2\2")
+        buf.write("\32\u0088\3\2\2\2\34\u0093\3\2\2\2\36\u00a4\3\2\2\2 \u00b0")
+        buf.write("\3\2\2\2\"\u00cb\3\2\2\2$&\5\30\r\2%$\3\2\2\2&\'\3\2\2")
+        buf.write("\2\'%\3\2\2\2\'(\3\2\2\2()\3\2\2\2)*\7\2\2\3*\3\3\2\2")
+        buf.write("\2+.\5\n\6\2,.\5\6\4\2-+\3\2\2\2-,\3\2\2\2.\5\3\2\2\2")
+        buf.write("/\62\5\16\b\2\60\62\5\b\5\2\61/\3\2\2\2\61\60\3\2\2\2")
+        buf.write("\62\7\3\2\2\2\63\66\5\20\t\2\64\66\5\22\n\2\65\63\3\2")
+        buf.write("\2\2\65\64\3\2\2\2\66\t\3\2\2\2\67<\5\24\13\28<\5\26\f")
+        buf.write("\29<\5\f\7\2:<\5\32\16\2;\67\3\2\2\2;8\3\2\2\2;9\3\2\2")
+        buf.write("\2;:\3\2\2\2<\13\3\2\2\2=>\7\22\2\2>?\7\25\2\2?@\5 \21")
+        buf.write("\2@\r\3\2\2\2AB\7\3\2\2BC\5\"\22\2CE\7\4\2\2DF\5\4\3\2")
+        buf.write("ED\3\2\2\2FG\3\2\2\2GE\3\2\2\2GH\3\2\2\2HI\3\2\2\2IJ\7")
+        buf.write("\6\2\2J\\\3\2\2\2KL\7\3\2\2LM\5\"\22\2MO\7\4\2\2NP\5\4")
+        buf.write("\3\2ON\3\2\2\2PQ\3\2\2\2QO\3\2\2\2QR\3\2\2\2RS\3\2\2\2")
+        buf.write("SU\7\5\2\2TV\5\4\3\2UT\3\2\2\2VW\3\2\2\2WU\3\2\2\2WX\3")
+        buf.write("\2\2\2XY\3\2\2\2YZ\7\6\2\2Z\\\3\2\2\2[A\3\2\2\2[K\3\2")
+        buf.write("\2\2\\\17\3\2\2\2]^\7\7\2\2^_\5\"\22\2_a\7\b\2\2`b\5\4")
+        buf.write("\3\2a`\3\2\2\2bc\3\2\2\2ca\3\2\2\2cd\3\2\2\2de\3\2\2\2")
+        buf.write("ef\7\6\2\2f\21\3\2\2\2gh\7\r\2\2hi\7\22\2\2ij\7\t\2\2")
+        buf.write("jk\5 \21\2kl\7\n\2\2lm\5 \21\2mo\7\b\2\2np\5\4\3\2on\3")
+        buf.write("\2\2\2pq\3\2\2\2qo\3\2\2\2qr\3\2\2\2rs\3\2\2\2st\7\6\2")
+        buf.write("\2t\23\3\2\2\2uv\7\26\2\2vw\7\22\2\2w\25\3\2\2\2xy\7\27")
+        buf.write("\2\2yz\5 \21\2z\27\3\2\2\2{|\7\13\2\2|}\7\22\2\2}~\7\30")
         buf.write("\2\2~\177\5\34\17\2\177\u0080\7\31\2\2\u0080\u0082\7\f")
         buf.write("\2\2\u0081\u0083\5\4\3\2\u0082\u0081\3\2\2\2\u0083\u0084")
         buf.write("\3\2\2\2\u0084\u0082\3\2\2\2\u0084\u0085\3\2\2\2\u0085")
         buf.write("\u0086\3\2\2\2\u0086\u0087\7\6\2\2\u0087\31\3\2\2\2\u0088")
         buf.write("\u0089\5\36\20\2\u0089\33\3\2\2\2\u008a\u008f\7\22\2\2")
-        buf.write("\u008b\u008c\7&\2\2\u008c\u008e\7\22\2\2\u008d\u008b\3")
-        buf.write("\2\2\2\u008e\u0091\3\2\2\2\u008f\u008d\3\2\2\2\u008f\u0090")
-        buf.write("\3\2\2\2\u0090\u0094\3\2\2\2\u0091\u008f\3\2\2\2\u0092")
-        buf.write("\u0094\3\2\2\2\u0093\u008a\3\2\2\2\u0093\u0092\3\2\2\2")
-        buf.write("\u0094\35\3\2\2\2\u0095\u0096\7\22\2\2\u0096\u0097\7\30")
-        buf.write("\2\2\u0097\u009c\5 \21\2\u0098\u0099\7&\2\2\u0099\u009b")
-        buf.write("\5 \21\2\u009a\u0098\3\2\2\2\u009b\u009e\3\2\2\2\u009c")
-        buf.write("\u009a\3\2\2\2\u009c\u009d\3\2\2\2\u009d\u009f\3\2\2\2")
-        buf.write("\u009e\u009c\3\2\2\2\u009f\u00a0\7\31\2\2\u00a0\u00a5")
-        buf.write("\3\2\2\2\u00a1\u00a2\7\22\2\2\u00a2\u00a3\7\30\2\2\u00a3")
-        buf.write("\u00a5\7\31\2\2\u00a4\u0095\3\2\2\2\u00a4\u00a1\3\2\2")
-        buf.write("\2\u00a5\37\3\2\2\2\u00a6\u00a7\b\21\1\2\u00a7\u00a8\7")
-        buf.write("\33\2\2\u00a8\u00b1\5 \21\7\u00a9\u00b1\7\21\2\2\u00aa")
+        buf.write("\u008b\u008c\7\'\2\2\u008c\u008e\7\22\2\2\u008d\u008b")
+        buf.write("\3\2\2\2\u008e\u0091\3\2\2\2\u008f\u008d\3\2\2\2\u008f")
+        buf.write("\u0090\3\2\2\2\u0090\u0094\3\2\2\2\u0091\u008f\3\2\2\2")
+        buf.write("\u0092\u0094\3\2\2\2\u0093\u008a\3\2\2\2\u0093\u0092\3")
+        buf.write("\2\2\2\u0094\35\3\2\2\2\u0095\u0096\7\22\2\2\u0096\u0097")
+        buf.write("\7\30\2\2\u0097\u009c\5 \21\2\u0098\u0099\7\'\2\2\u0099")
+        buf.write("\u009b\5 \21\2\u009a\u0098\3\2\2\2\u009b\u009e\3\2\2\2")
+        buf.write("\u009c\u009a\3\2\2\2\u009c\u009d\3\2\2\2\u009d\u009f\3")
+        buf.write("\2\2\2\u009e\u009c\3\2\2\2\u009f\u00a0\7\31\2\2\u00a0")
+        buf.write("\u00a5\3\2\2\2\u00a1\u00a2\7\22\2\2\u00a2\u00a3\7\30\2")
+        buf.write("\2\u00a3\u00a5\7\31\2\2\u00a4\u0095\3\2\2\2\u00a4\u00a1")
+        buf.write("\3\2\2\2\u00a5\37\3\2\2\2\u00a6\u00a7\b\21\1\2\u00a7\u00a8")
+        buf.write("\7\33\2\2\u00a8\u00b1\5 \21\7\u00a9\u00b1\7\21\2\2\u00aa")
         buf.write("\u00b1\7\22\2\2\u00ab\u00ac\7\30\2\2\u00ac\u00ad\5 \21")
         buf.write("\2\u00ad\u00ae\7\31\2\2\u00ae\u00b1\3\2\2\2\u00af\u00b1")
         buf.write("\7\16\2\2\u00b0\u00a6\3\2\2\2\u00b0\u00a9\3\2\2\2\u00b0")
@@ -89,15 +89,16 @@ def serializedATN():
         buf.write("\u00be\u00bb\3\2\2\2\u00bf\u00c2\3\2\2\2\u00c0\u00be\3")
         buf.write("\2\2\2\u00c0\u00c1\3\2\2\2\u00c1!\3\2\2\2\u00c2\u00c0")
         buf.write("\3\2\2\2\u00c3\u00c4\b\22\1\2\u00c4\u00c5\5 \21\2\u00c5")
-        buf.write("\u00c6\7\24\2\2\u00c6\u00c7\5 \21\2\u00c7\u00ca\3\2\2")
-        buf.write("\2\u00c8\u00ca\7\22\2\2\u00c9\u00c3\3\2\2\2\u00c9\u00c8")
-        buf.write("\3\2\2\2\u00ca\u00d3\3\2\2\2\u00cb\u00cc\f\5\2\2\u00cc")
-        buf.write("\u00cd\7$\2\2\u00cd\u00d2\5\"\22\6\u00ce\u00cf\f\4\2\2")
-        buf.write("\u00cf\u00d0\7%\2\2\u00d0\u00d2\5\"\22\5\u00d1\u00cb\3")
-        buf.write("\2\2\2\u00d1\u00ce\3\2\2\2\u00d2\u00d5\3\2\2\2\u00d3\u00d1")
-        buf.write("\3\2\2\2\u00d3\u00d4\3\2\2\2\u00d4#\3\2\2\2\u00d5\u00d3")
-        buf.write("\3\2\2\2\30\'-\61\65;GQW[cq\u0084\u008f\u0093\u009c\u00a4")
-        buf.write("\u00b0\u00be\u00c0\u00c9\u00d1\u00d3")
+        buf.write("\u00c6\7\24\2\2\u00c6\u00c7\5 \21\2\u00c7\u00cc\3\2\2")
+        buf.write("\2\u00c8\u00c9\7&\2\2\u00c9\u00cc\5\"\22\4\u00ca\u00cc")
+        buf.write("\7\22\2\2\u00cb\u00c3\3\2\2\2\u00cb\u00c8\3\2\2\2\u00cb")
+        buf.write("\u00ca\3\2\2\2\u00cc\u00d5\3\2\2\2\u00cd\u00ce\f\6\2\2")
+        buf.write("\u00ce\u00cf\7$\2\2\u00cf\u00d4\5\"\22\7\u00d0\u00d1\f")
+        buf.write("\5\2\2\u00d1\u00d2\7%\2\2\u00d2\u00d4\5\"\22\6\u00d3\u00cd")
+        buf.write("\3\2\2\2\u00d3\u00d0\3\2\2\2\u00d4\u00d7\3\2\2\2\u00d5")
+        buf.write("\u00d3\3\2\2\2\u00d5\u00d6\3\2\2\2\u00d6#\3\2\2\2\u00d7")
+        buf.write("\u00d5\3\2\2\2\30\'-\61\65;GQW[cq\u0084\u008f\u0093\u009c")
+        buf.write("\u00a4\u00b0\u00be\u00c0\u00cb\u00d3\u00d5")
         return buf.getvalue()
 
 
@@ -117,7 +118,7 @@ class Logo3dParser ( Parser ):
                      "<INVALID>", "<INVALID>", "<INVALID>", "':='", "'>>'", 
                      "'<<'", "'('", "')'", "'+'", "'-'", "'*'", "'/'", "'>'", 
                      "'<'", "'=='", "'!='", "'>='", "'<='", "'&&'", "'||'", 
-                     "','", "'.'" ]
+                     "'!'", "','", "'.'" ]
 
     symbolicNames = [ "<INVALID>", "IF", "THEN", "ELSE", "END", "WHILE", 
                       "DO", "FROM", "TO", "PROC", "IS", "FOR", "VALOR", 
@@ -125,7 +126,7 @@ class Logo3dParser ( Parser ):
                       "ASSIGNACIO", "LECTURA", "ESCRIPTURA", "PAR1", "PAR2", 
                       "SUMA", "RESTA", "MULT", "DIV", "MESGRAN", "MESPETIT", 
                       "IGUAL", "DIF", "MESGRANIGUAL", "MESPETITIGUAL", "AND", 
-                      "OR", "COMA", "PUNT", "LINE_COMMENT", "WS" ]
+                      "OR", "NOT", "COMA", "PUNT", "LINE_COMMENT", "WS" ]
 
     RULE_root = 0
     RULE_sentencia = 1
@@ -186,10 +187,11 @@ class Logo3dParser ( Parser ):
     MESPETITIGUAL=33
     AND=34
     OR=35
-    COMA=36
-    PUNT=37
-    LINE_COMMENT=38
-    WS=39
+    NOT=36
+    COMA=37
+    PUNT=38
+    LINE_COMMENT=39
+    WS=40
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -1552,8 +1554,8 @@ class Logo3dParser ( Parser ):
         def OPERADORLOGIC(self):
             return self.getToken(Logo3dParser.OPERADORLOGIC, 0)
 
-        def VARIABLE(self):
-            return self.getToken(Logo3dParser.VARIABLE, 0)
+        def NOT(self):
+            return self.getToken(Logo3dParser.NOT, 0)
 
         def condicio(self, i:int=None):
             if i is None:
@@ -1561,6 +1563,9 @@ class Logo3dParser ( Parser ):
             else:
                 return self.getTypedRuleContext(Logo3dParser.CondicioContext,i)
 
+
+        def VARIABLE(self):
+            return self.getToken(Logo3dParser.VARIABLE, 0)
 
         def AND(self):
             return self.getToken(Logo3dParser.AND, 0)
@@ -1596,7 +1601,7 @@ class Logo3dParser ( Parser ):
         self.enterRecursionRule(localctx, 32, self.RULE_condicio, _p)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 199
+            self.state = 201
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,19,self._ctx)
             if la_ == 1:
@@ -1610,12 +1615,19 @@ class Logo3dParser ( Parser ):
 
             elif la_ == 2:
                 self.state = 198
+                self.match(Logo3dParser.NOT)
+                self.state = 199
+                self.condicio(2)
+                pass
+
+            elif la_ == 3:
+                self.state = 200
                 self.match(Logo3dParser.VARIABLE)
                 pass
 
 
             self._ctx.stop = self._input.LT(-1)
-            self.state = 209
+            self.state = 211
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,21,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
@@ -1623,37 +1635,37 @@ class Logo3dParser ( Parser ):
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 207
+                    self.state = 209
                     self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,20,self._ctx)
                     if la_ == 1:
                         localctx = Logo3dParser.CondicioContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_condicio)
-                        self.state = 201
-                        if not self.precpred(self._ctx, 3):
-                            from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
-                        self.state = 202
-                        self.match(Logo3dParser.AND)
                         self.state = 203
-                        self.condicio(4)
+                        if not self.precpred(self._ctx, 4):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
+                        self.state = 204
+                        self.match(Logo3dParser.AND)
+                        self.state = 205
+                        self.condicio(5)
                         pass
 
                     elif la_ == 2:
                         localctx = Logo3dParser.CondicioContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_condicio)
-                        self.state = 204
-                        if not self.precpred(self._ctx, 2):
-                            from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
-                        self.state = 205
-                        self.match(Logo3dParser.OR)
                         self.state = 206
-                        self.condicio(3)
+                        if not self.precpred(self._ctx, 3):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
+                        self.state = 207
+                        self.match(Logo3dParser.OR)
+                        self.state = 208
+                        self.condicio(4)
                         pass
 
              
-                self.state = 211
+                self.state = 213
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,21,self._ctx)
 
@@ -1697,11 +1709,11 @@ class Logo3dParser ( Parser ):
 
     def condicio_sempred(self, localctx:CondicioContext, predIndex:int):
             if predIndex == 4:
-                return self.precpred(self._ctx, 3)
+                return self.precpred(self._ctx, 4)
          
 
             if predIndex == 5:
-                return self.precpred(self._ctx, 2)
+                return self.precpred(self._ctx, 3)
          
 
 

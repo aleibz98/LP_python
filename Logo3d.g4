@@ -72,6 +72,7 @@ expresio        :   expresio SUMA expresio
 condicio                :   expresio OPERADORLOGIC expresio
                         |   condicio AND condicio
                         |   condicio OR condicio
+                        |   NOT condicio
                         |   VARIABLE
                         ;
 
@@ -104,8 +105,10 @@ IGUAL           : '==';
 DIF             : '!=';
 MESGRANIGUAL    : '>=';
 MESPETITIGUAL   : '<=';
+
 AND             : '&&';
 OR              : '||';
+NOT             : '!';
 
 COMA            : ',';
 PUNT            : '.';
