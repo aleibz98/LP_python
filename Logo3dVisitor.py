@@ -282,8 +282,10 @@ class Logo3dVisitor(ParseTreeVisitor, object):
         if ctx.getChildCount() == 1:
             if Logo3dParser.symbolicNames[ctx.getChild(0).getSymbol().type] == "VARIABLE":
                 content = self.current_ctx[ctx.getChild(0).getText()]
-                #print(self.current_ctx)
                 result = content
+        elif ctx.getChildCount() == 2:
+            if ctx.getChild(0).getText() == '!':
+                result = not self.visit(ctx.getChild(1))
         else:
             exp1 = self.visit(ctx.getChild(0))
             exp2 = self.visit(ctx.getChild(2))
